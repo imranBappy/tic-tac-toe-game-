@@ -1,0 +1,20 @@
++*** Tic Tac Toe Game ***
++*** Made by: Imran Hossen ***
++*** Date: 25/06/2023 ***
++***************************
+
++---+---+---+
+|   |   |   |
++---+---+---+
+|   |   |   |
++---+---+---+
+|   |   |   |
++---+---+---+
+
+
+Game Requirements:
+1. 2 players should be able to play the game (both sitting at the same computer)
+2. Players can go back to previous step
+3. Players can reset the game
+"""
+
