@@ -1,13 +1,13 @@
 import { useState } from "react";
-
+const init = [
+    [1, 1, 1],
+    [1, 1, 1],
+    [1, 1, 1],
+]
 const Game = () => {
-    const [count, setCount] = useState([
-        [1, 1, 1],
-        [1, 1, 1],
-        [1, 1, 1],
-    ])
-
+    const [count, setCount] = useState(init)
     const [history, setHistory] = useState([])
+    const [isBack, setIsBack] = useState(-1)
 
     const [isOver, setIsOver] = useState(false)
     const gameIsOver = (scores) => {
@@ -39,19 +39,26 @@ const Game = () => {
     const handleClick = (row, col) => {
         let score = Math.round(Math.random() * 1) === 1 ? 'X' : 'O'
         let newScore = [[...count[0]], [...count[1]], [...count[2]]];
-
         if (newScore[row][col] === 1) {
             newScore[row][col] = score;
             gameIsOver([...newScore]);
             setHistory([...history, newScore])
             setCount(newScore)
+            if (isBack !== -1) {
+                setHistory(history.slice(0, isBack + 1))
+                setIsBack(-1)
+            }
         }
     }
-    const handleMove = (item) => {
-        console.log({ item, history });
+    const handleMove = ({ item, index }) => {
         setCount(item)
+        setIsBack(index)
     };
-    console.log({ history, count });
+    const handleStart = () => {
+        setCount(init)
+        setHistory([]);
+        setIsOver(false);
+    }
     return (
         <>
             {
@@ -98,10 +105,14 @@ const Game = () => {
 
                 <div >
                     <ul className=" " >
+                        <ol onClick={handleStart} className=" border border-t-lime-950 ">
+                            <button>Go To Game Start </button>
+                        </ol>
                         {
                             history.map((item, index) => {
                                 return (
-                                    <ol onClick={() => handleMove(item)} className=" border border-t-lime-950 " key={index}>
+
+                                    <ol onClick={() => handleMove({ item, index })} className=" border border-t-lime-950 " key={index}>
                                         <button>Go To Move #{index} </button>
                                     </ol>
                                 )
