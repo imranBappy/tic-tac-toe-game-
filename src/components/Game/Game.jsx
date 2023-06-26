@@ -97,17 +97,17 @@ const Game = () => {
                 </div>
 
                 <div >
-                    <ol className=" " >
+                    <ul className=" " >
                         {
                             history.map((item, index) => {
                                 return (
-                                    <li onClick={() => handleMove(item)} className=" border border-t-lime-950 " key={index}>
+                                    <ol onClick={() => handleMove(item)} className=" border border-t-lime-950 " key={index}>
                                         <button>Go To Move #{index} </button>
-                                    </li>
+                                    </ol>
                                 )
                             })
                         }
-                    </ol>
+                    </ul>
                 </div>
             </div>
 
